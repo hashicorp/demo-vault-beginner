@@ -1,0 +1,15 @@
+[Unit]
+Description=Vault Remote
+Documentation=https://www.vaultproject.io/docs/
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Environment=GOMAXPROCS=8
+Restart=on-failure
+ExecStart=/usr/local/bin/vault server -config=/workstation/vault/config.hcl
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

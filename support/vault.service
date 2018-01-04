@@ -1,0 +1,16 @@
+[Unit]
+Description=Vault
+Documentation=https://www.vaultproject.io/docs/
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Environment=GOMAXPROCS=8
+Environment=VAULT_DEV_ROOT_TOKEN_ID=root
+Restart=on-failure
+ExecStart=/usr/local/bin/vault server -dev
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target
