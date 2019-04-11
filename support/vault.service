@@ -8,7 +8,7 @@ After=network-online.target
 Environment=GOMAXPROCS=8
 Environment=VAULT_DEV_ROOT_TOKEN_ID=root
 Restart=on-failure
-ExecStart=/usr/local/bin/vault server -dev
+ExecStart=/usr/local/bin/vault server -dev -dev-listen-address=0.0.0.0:8200
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGINT
 
